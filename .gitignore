@@ -65,3 +65,14 @@ profile_default
 
 # swap files
 *.swp
+
+.DS_Store
+.directory
+db
+pid
+security
+*kate-swp
+history.sqlite
+log
+Icon
+
