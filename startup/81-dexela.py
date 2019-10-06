@@ -18,6 +18,7 @@ from ophyd.areadetector import (AreaDetector, PixiradDetectorCam, ImagePlugin,
                                 OverlayPlugin)
 from ophyd.areadetector.trigger_mixins import SingleTrigger
 from enum import Enum
+from nslsii.ad33 import StatsPluginV33
 
 
 # monkey patch for trailing slash problem
@@ -48,6 +49,11 @@ class XPDDDexelaTiffPlugin(TIFFPlugin, FileStoreTIFFIterativeWrite ):
 
 class XPDDDexelaDetector(SingleTrigger, DexelaDetector):
     total_points = Cpt(Signal, value=1, doc="The total number of points to be taken")
+    stats1 = Cpt(StatsPluginV33, 'Stats1:')
+    stats2 = Cpt(StatsPluginV33, 'Stats2:')
+    stats3 = Cpt(StatsPluginV33, 'Stats3:')
+    stats4 = Cpt(StatsPluginV33, 'Stats4:')
+    stats5 = Cpt(StatsPluginV33, 'Stats5:')
     tiff = Cpt(XPDDDexelaTiffPlugin, 'TIFF1:',
                read_attrs=[],
                configuration_attrs=[],
@@ -79,3 +85,6 @@ class XPDDDexelaDetector(SingleTrigger, DexelaDetector):
 dexela = XPDDDexelaDetector('XF:28IDD-ES:2{Det:DEX}', name='dexela')
 dexela.read_attrs = ['tiff']
 dexela.detector_type.kind = 'config'
+
+dexela.stats1.kind = 'hinted'
+dexela.stats1.total.kind = 'hinted'  

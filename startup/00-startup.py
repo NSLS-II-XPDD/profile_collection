@@ -4,7 +4,7 @@ import nslsii
 # See docstring for nslsii.configure_base() for more details
 # this command takes away much of the boilerplate for settting up a profile
 # (such as setting up best effort callbacks etc)
-nslsii.configure_base(get_ipython().user_ns, 'xpdd', pbar=True, bec=True,
+nslsii.configure_base(get_ipython().user_ns, 'xpdd', pbar=False, bec=True,
                       magics=True, mpl=True, epics_context=False)
 
 # IMPORTANT : This is needed to read old data
@@ -37,3 +37,17 @@ def show_env():
     a = out.decode('utf-8')
     b = a.split('\n')
     print(b[0].split('/')[-1][:-1])
+
+
+
+from databroker.assets.handlers import AreaDetectorTiffHandler
+
+class SaferAreaDetectorTiffHandler(AreaDetectorTiffHandler):
+    def __call__(self, *args, **kwargs):
+        try:
+            return super().__call__(*args, **kwargs)
+        except FileNotFoundError:
+            self._fpp = 1
+            return super().__call__(*args, **kwargs)
+        
+db.reg.register_handler('AD_TIFF', SaferAreaDetectorTiffHandler, overwrite=True)

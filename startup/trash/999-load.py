@@ -1,18 +1,3 @@
-#!/usr/bin/env python
-##############################################################################
-#
-# xpdacq            by Billinge Group
-#                   Simon J. L. Billinge sb2896@columbia.edu
-#                   (c) 2016 trustees of Columbia University in the City of
-#                        New York.
-#                   All rights reserved
-#
-# File coded by:    Timothy Liu
-#
-# See AUTHORS.txt for a list of people who contributed.
-# See LICENSE.txt for license information.
-#
-##############################################################################
 import os
 from xpdacq.xpdacq_conf import (glbl_dict, configure_device,
                                 _reload_glbl, _set_glbl,
@@ -28,7 +13,6 @@ configure_device(area_det=dexela, shutter=shctl1,
                  temp_controller=cs700, db=db,
                  filter_bank=fb,
                  ring_current=ring_current,
-                 robot=robot
                  )
 
 # cache previous glbl state
@@ -61,10 +45,6 @@ xrun.md['beamline_config'] = beamline_config
 # insert header to db, either simulated or real
 xrun.subscribe(db.insert, 'all')
 
-# robot command
-xrun.register_command('load_sample', _load_sample)
-xrun.register_command('unload_sample', _unload_sample)
-
 if bt:
     xrun.beamtime = bt
 
@@ -83,5 +63,4 @@ from xpdacq.calib import *
 #from xpdan.data_reduction import *
 
 print('OK, ready to go.  To continue, follow the steps in the xpdAcq')
-print('documentation at http://xpdacq.github.io/xpdacq\n')
-
+print('documentation at http://xpdacq.github.io/xpdacq\n') 
