@@ -75,4 +75,5 @@ security
 history.sqlite
 log
 Icon
+.ipynb_checkpoints
 
