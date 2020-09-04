@@ -47,7 +47,7 @@ class XPDDEmergentDetector(SingleTrigger, AreaDetector):
     tiff = Cpt(XPDDEmergentTiffPlugin, 'TIFF1:',
                 read_attrs=[],
                 configuration_attrs=[],
-                write_path_template='Z:\\emergent_data\\%Y\\%m\\%d\\',
+                write_path_template='F:\\emergent_data\\%Y\\%m\\%d\\',
                 read_path_template='/nsls2/xf28id2/emergent_data/%Y/%m/%d/',
                 root='/nsls2/xf28id2/emergent_data/')
 
